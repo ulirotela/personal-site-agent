@@ -1,0 +1,26 @@
+[project]
+name = "personal-site-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Uli Rotela", email = "ulirotela@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.141.1",
+    "langchain-anthropic>=1.5.3",
+    "langchain-openai>=1.4.2",
+    "langgraph>=1.2.10",
+    "pinecone>=9.1.0",
+    "pydantic-settings>=2.14.2",
+    "python-dotenv>=1.2.2",
+    "slowapi>=0.1.10",
+    "uvicorn>=0.52.1",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]

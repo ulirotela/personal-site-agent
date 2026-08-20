@@ -1,0 +1,42 @@
+# render.yaml — Infrastructure as Code for Render
+services:
+  - type: web
+    name: personal-site-agent
+    runtime: python
+    region: frankfurt
+    plan: free
+    buildCommand: pip install uv && uv sync --frozen --no-dev
+    startCommand: uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.9"
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: RATE_LIMIT
+        value: "20/minute"
+      - key: CACHE_TTL_SECONDS
+        value: "300"
+      - key: MAX_RETRIES
+        value: "3"
+      - key: PRIMARY_MODEL
+        value: gpt-4o-mini
+      - key: FALLBACK_MODEL
+        value: claude-haiku-4-5-20251001
+      - key: OPENAI_API_KEY
+        sync: false  # Must be set manually — NEVER commit secrets
+      - key: ANTHROPIC_API_KEY
+        sync: false  # Must be set manually — NEVER commit secrets
+      - key: PINECONE_API_KEY
+        sync: false  # Must be set manually — NEVER commit secrets
+      - key: PINECONE_INDEX_NAME
+        value: personal-site-content
+      - key: LANGCHAIN_API_KEY
+        sync: false  # Must be set manually
+      - key: LANGCHAIN_TRACING_V2
+        value: "true"
+      - key: LANGCHAIN_PROJECT
+        value: personal-site-agent
+    healthCheckPath: /health
+    autoDeploy: true
