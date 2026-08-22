@@ -31,11 +31,20 @@ class Settings(BaseSettings):
     cache_ttl_seconds: int = 300
     max_retries: int = 3
 
+    # Comma-separated list of origins allowed to call this API.
+    # Local dev defaults cover Live Server / VS Code. In production, set
+    # ALLOWED_ORIGINS on Render to your real deployed frontend domain(s).
+    allowed_origins: str = "http://127.0.0.1:5500,http://localhost:5500"
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
     @property
     def is_production(self) -> bool:
         return self.app_env == "production"
+
+    @property
+    def cors_origins(self) -> list[str]:
+        return [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]
 @lru_cache()
 def get_settings() -> Settings:
     """Get the application settings, cached for performance."""

@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ulice Rotela — AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Serif+Text:ital@0;1&family=Doto:wght@400..900&family=Inter:wght@400;500;600;700&family=Pixelify+Sans:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <button
+      class="mascot"
+      type="button"
+      aria-label="Back to top"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      <svg
+        viewBox="0 0 76 88"
+        shape-rendering="crispEdges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g fill="var(--text)">
+          <rect x="28" y="0" width="20" height="4" />
+          <rect x="48" y="4" width="8" height="4" />
+          <rect x="20" y="4" width="4" height="4" />
+          <rect x="12" y="8" width="4" height="4" />
+          <rect x="56" y="8" width="4" height="4" />
+          <rect x="8" y="12" width="4" height="4" />
+          <rect x="60" y="12" width="4" height="4" />
+          <rect x="4" y="16" width="4" height="4" />
+          <rect x="64" y="16" width="4" height="4" />
+          <rect x="4" y="20" width="4" height="4" />
+          <rect x="64" y="20" width="4" height="4" />
+          <rect x="0" y="24" width="4" height="4" />
+          <rect x="68" y="24" width="4" height="4" />
+          <rect x="0" y="28" width="4" height="4" />
+          <rect x="68" y="28" width="4" height="4" />
+          <rect x="0" y="32" width="4" height="4" />
+          <rect x="68" y="32" width="4" height="4" />
+          <rect x="0" y="36" width="4" height="4" />
+          <rect x="68" y="36" width="4" height="4" />
+          <rect x="0" y="40" width="4" height="4" />
+          <rect x="68" y="40" width="4" height="4" />
+          <rect x="0" y="44" width="4" height="4" />
+          <rect x="68" y="44" width="4" height="4" />
+          <rect x="4" y="48" width="4" height="4" />
+          <rect x="64" y="48" width="4" height="4" />
+          <rect x="4" y="52" width="4" height="4" />
+          <rect x="64" y="52" width="4" height="4" />
+          <rect x="8" y="56" width="4" height="4" />
+          <rect x="60" y="56" width="4" height="4" />
+          <rect x="8" y="60" width="4" height="4" />
+          <rect x="60" y="60" width="4" height="4" />
+          <rect x="12" y="64" width="4" height="4" />
+          <rect x="56" y="64" width="4" height="4" />
+          <rect x="16" y="68" width="4" height="4" />
+          <rect x="52" y="68" width="4" height="4" />
+          <rect x="20" y="72" width="4" height="4" />
+          <rect x="48" y="72" width="4" height="4" />
+          <rect x="24" y="76" width="4" height="4" />
+          <rect x="44" y="76" width="4" height="4" />
+          <rect x="28" y="80" width="4" height="4" />
+          <rect x="40" y="80" width="4" height="4" />
+          <rect x="32" y="84" width="8" height="4" />
+          <rect x="28" y="64" width="16" height="4" />
+        </g>
+        <g fill="var(--accent)">
+          <rect x="8" y="28" width="12" height="4" />
+          <rect x="8" y="32" width="4" height="4" />
+          <rect x="16" y="32" width="8" height="4" />
+          <rect x="8" y="36" width="20" height="4" />
+          <rect x="8" y="40" width="24" height="4" />
+          <rect x="12" y="44" width="20" height="4" />
+          <rect x="16" y="48" width="16" height="4" />
+          <rect x="20" y="52" width="12" height="4" />
+          <rect x="52" y="28" width="12" height="4" />
+          <rect x="48" y="32" width="8" height="4" />
+          <rect x="60" y="32" width="4" height="4" />
+          <rect x="44" y="36" width="20" height="4" />
+          <rect x="40" y="40" width="24" height="4" />
+          <rect x="40" y="44" width="20" height="4" />
+          <rect x="40" y="48" width="16" height="4" />
+          <rect x="40" y="52" width="12" height="4" />
+        </g>
+      </svg>
+    </button>
+
+    <nav id="nav">
+      <div class="nav-inner">
+        <div class="nav-links">
+          <a href="#hero">Home</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <section id="hero">
+      <h1>Uli Rotela</h1>
+      <p class="tagline">AI Engineer</p>
+      <div class="intro">
+        <p>
+          I'm an AI Engineer building production-grade multi-agent systems — RAG
+          pipelines, LangGraph orchestration, and APIs designed to keep working
+          when things go wrong, not just when they go right.
+        </p>
+        <p>
+          Before AI engineering, I spent 9+ years in IT operations and
+          infrastructure — most recently as the sole technical owner for AV and
+          networking across 9 international sites at General Motors. That
+          background shapes how I build: retries, fallbacks, and monitoring
+          aren't an afterthought.
+        </p>
+        <p>
+          I hold an MSc in Applied Software Development from CCT College Dublin,
+          and I'm based in Dublin. Curious how something on this site works? →
+          ask the assistant in the corner, or scroll down.
+        </p>
+      </div>
+      <p class="follow">
+        — Follow me on
+        <a
+          href="https://linkedin.com/in/ulices-rotela"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >.
+      </p>
+      <div class="signature" aria-hidden="true">UR</div>
+    </section>
+    <section id="expertise">
+      <h2>Expertise</h2>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <h3>AI / LLM Engineering</h3>
+          <p>
+            LangGraph, multi-agent systems, RAG (Pinecone), OpenAI & Anthropic
+            APIs.
+          </p>
+        </div>
+        <div class="expertise-card">
+          <h3>Backend & Infra</h3>
+          <p>FastAPI, Docker, Render, REST APIs, CI/CD.</p>
+        </div>
+        <div class="expertise-card">
+          <h3>Systems & Reliability</h3>
+          <p>
+            Production monitoring, security pipelines, multi-provider fallback.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="work">
+      <h2>Work</h2>
+      <div class="work-grid">
+        <div class="work-card">
+          <h3>Production LangGraph API</h3>
+          <p>
+            FastAPI + LangGraph API with security pipeline, caching, and
+            multi-provider fallback.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>Personal AI Portfolio Site</h3>
+          <p>
+            This site — a multi-agent system with RAG, routing questions to
+            specialist agents.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>VEMSA Consultora</h3>
+          <p>
+            Full-stack freelance project: website, client portal, and admin
+            panel for a real client.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>Multi-Tenant SaaS Chatbot</h3>
+          <p>
+            WhatsApp Business-integrated AI assistant platform with per-client
+            isolation.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>AI Evaluation Framework</h3>
+          <p>
+            Metrics for accuracy, hallucination detection, latency, and cost per
+            response.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>Broken Screen Detection</h3>
+          <p>
+            Computer vision system to classify device screens as damaged or
+            intact.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>Paraguayan Community Platform</h3>
+          <p>
+            Website with an embedded AI assistant, reusing the multi-tenant
+            engine.
+          </p>
+        </div>
+        <div class="work-card">
+          <h3>Interviewer Pro</h3>
+          <p>
+            AI mock interview simulator (Streamlit + GPT-4o) with scoring and
+            feedback.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2023 — 2026</div>
+          <div class="timeline-content">
+            <h3>Systems Engineer, General Motors IT Services Ireland</h3>
+            <p>
+              Sole technical owner for AV and conferencing systems (Cisco video
+              conferencing, Biamp DSPs, Lightware video matrix, Pixera media
+              servers) across 9 Experience Centers in 5 European countries.
+              Administered network infrastructure via Cisco Meraki and built
+              automation to reduce manual operational work.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2016 — 2020</div>
+          <div class="timeline-content">
+            <h3>Technical Support Engineer, Cibersons Group</h3>
+            <p>
+              Remote helpdesk support for B2B clients across hardware, software,
+              and network issues. Managed servers and workstations, and resolved
+              escalated technical issues with product and engineering teams.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Education</div>
+          <div class="timeline-content">
+            <h3>MSc Applied Software Development — CCT College Dublin</h3>
+            <p>
+              Also holds an MSc in Development Practice from Trinity College
+              Dublin and a Bachelor's degree in Computer Science from the
+              Catholic University of Asunción, Paraguay.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <p class="contact-intro">
+        Open to new roles, freelance projects, or just a chat about AI
+        engineering — reach out anytime.
+      </p>
+      <a href="mailto:ulirotela@gmail.com" class="contact-email"
+        >ulirotela@gmail.com</a
+      >
+      <div class="contact-links">
+        <a
+          href="https://github.com/ulirotela"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+        <a
+          href="https://linkedin.com/in/ulices-rotela"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+      </div>
+    </section>
+
+    <div class="ticker">
+      <div class="ticker-row">
+        <span class="ticker-icon">→</span>Dublin, Ireland
+      </div>
+      <div class="ticker-row">
+        <span class="ticker-icon">→</span>Currently open to new roles &
+        freelance projects
+      </div>
+      <div class="ticker-row">
+        <span class="ticker-icon">→</span
+        ><a
+          href="https://github.com/ulirotela"
+          target="_blank"
+          rel="noopener noreferrer"
+          >github.com/ulirotela</a
+        >
+      </div>
+      <div class="ticker-row">
+        <span class="ticker-icon">→</span
+        ><a href="mailto:ulirotela@gmail.com">ulirotela@gmail.com</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Uli Rotela. All rights reserved.</p>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+
+    <div id="chat-widget">
+      <!-- 1. botton -->
+      <button id="chat-toggle" aria-label="open chat"></button>
+
+      <!--2. panel, hiden css-->
+      <div id="chat-panel">
+        <div id="chat-header">
+          <div id="chat-avatar">UR</div>
+          <div id="chat-header-text">
+            <div id="chat-title">Uli Rotela</div>
+            <div id="chat-status">
+              <span class="status-dot"></span>Ask me anything
+            </div>
+          </div>
+        </div>
+
+        <!--3. Message list, empty, filling with JS-->
+        <div id="chat-messages"></div>
+
+        <!--4. Form to sent-->
+        <form id="chat-form">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Your message.."
+            autocomplete="off"
+          />
+          <button type="submit" aria-label="Send">&#10148;</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ services:
     runtime: python
     region: frankfurt
     plan: free
+    rootDir: backend
     buildCommand: pip install uv && uv sync --frozen --no-dev
     startCommand: uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -16,6 +17,8 @@ services:
         value: INFO
       - key: RATE_LIMIT
         value: "20/minute"
+      - key: ALLOWED_ORIGINS
+        value: "http://127.0.0.1:5500,http://localhost:5500"  # TODO: replace with your real deployed frontend domain(s), comma-separated
       - key: CACHE_TTL_SECONDS
         value: "300"
       - key: MAX_RETRIES

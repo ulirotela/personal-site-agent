@@ -15,7 +15,12 @@ class chatRequest(BaseModel):
         max_length=1000,
         description="The message to be sent to the agent.",
     )
-    thread_id: str = Field(default="default", description="Conversation thread ID")
+    thread_id: str = Field(
+        default="default",
+        max_length=100,
+        pattern=r"^[a-zA-Z0-9-]+$",
+        description="Conversation thread ID",
+    )
 
 class chatResponse(BaseModel):
     """Model for chat response output."""
