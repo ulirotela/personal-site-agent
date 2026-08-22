@@ -47,7 +47,7 @@ chatForm.addEventListener("submit", (event) => {
   addMessage(message, "user");
   const typing = showTyping();
 
-  fetch('${API_BASE}/chat', {
+  fetch(`${API_BASE}/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message, thread_id: threadId }),
