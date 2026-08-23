@@ -8,6 +8,11 @@ __pycache__/
 .venv/
 venv/
 
+# Node / Vite (frontend) — generated, rebuilt by CI on every deploy
+frontend/node_modules/
+frontend/dist/
+frontend/public/
+
 # IDE
 .vscode/
 .idea/

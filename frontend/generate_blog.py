@@ -33,7 +33,7 @@ import markdown
 
 ROOT = Path(__file__).parent
 POSTS_DIR = ROOT / "posts"
-BLOG_DIR = ROOT / "blog"
+BLOG_DIR = ROOT / "public" / "blog"
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n(.*)$", re.DOTALL)
 

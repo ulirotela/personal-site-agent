@@ -36,13 +36,26 @@ jobs:
         working-directory: frontend
         run: python generate_blog.py
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install npm deps
+        working-directory: frontend
+        run: npm install
+
+      - name: Build with Vite
+        working-directory: frontend
+        run: npm run build
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend
+          path: frontend/dist
 
   deploy:
     needs: build

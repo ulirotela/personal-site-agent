@@ -21,6 +21,9 @@ if settings.pinecone_index_name not in [index.name for index in pc.list_indexes(
 
 index = pc.Index(settings.pinecone_index_name)
 
+index.delete(delete_all=True)
+print("Cleared existing vectors from index.")
+
 texts = [chunk["text"] for chunk in CHUNKS]
 vectors = embedder.embed_documents(texts)
 
