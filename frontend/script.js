@@ -49,14 +49,41 @@ if (window.location.hash) {
 const chatToggle = document.getElementById("chat-toggle");
 const chatPanel = document.getElementById("chat-panel");
 
-chatToggle.addEventListener("click", ()=> {
-  chatPanel.classList.toggle("open");
-})
-
 //-- submit form
 const chatForm = document.getElementById("chat-form")
 const chatInput = document.getElementById("chat-input")
 const chatMessages = document.getElementById("chat-messages")
+
+// The agent already remembers past messages server-side (Postgres, keyed by
+// threadId) even after a full page reload — but the visible chat bubbles
+// don't, since they're just DOM elements that get wiped on reload. The
+// first time the panel opens, fetch the saved history and repaint it so
+// the UI catches up to what the agent already knows.
+let historyLoaded = false;
+
+chatToggle.addEventListener("click", () => {
+  chatPanel.classList.toggle("open");
+
+  if (chatPanel.classList.contains("open") && !historyLoaded) {
+    historyLoaded = true;
+    loadHistory();
+  }
+})
+
+function loadHistory() {
+  fetch(`${API_BASE}/chat/history/${threadId}`)
+    .then((response) => {
+      if (!response.ok) throw new Error("Server error");
+      return response.json();
+    })
+    .then((data) => {
+      data.messages.forEach((msg) => addMessage(msg.content, msg.role));
+    })
+    .catch(() => {
+      // No previous history, or the request failed — chat just starts
+      // empty, same as before this feature existed.
+    });
+}
 
 chatForm.addEventListener("submit", (event) => {
   event.preventDefault();

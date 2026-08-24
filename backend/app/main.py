@@ -15,7 +15,7 @@ import time
 import os
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, HTTPException, Path
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
@@ -96,7 +96,7 @@ app.state.limiter = limiter
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().cors_origins,
-    allow_methods=["POST"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -234,10 +234,30 @@ async def chat(request: Request, body: chatRequest):
         processing_time_ms=round(timer.elapsed_ms, 2),
         security_notes=security_notes,
     )
-    
-    
-    
-    
+
+
+@app.get("/chat/history/{thread_id}")
+async def get_chat_history(
+    thread_id: str = Path(..., max_length=100, pattern=r"^[a-zA-Z0-9-]+$"),
+):
+    """
+    Return the persisted conversation history for a thread_id, so the
+    frontend can re-render the chat bubbles after a full page reload
+    (e.g. navigating to /blog and back) without losing the visible history.
+    The agent's own memory (in Postgres) already survives this — this
+    endpoint just lets the UI catch up to what the agent already knows.
+    """
+    state = agent.graph.get_state({"configurable": {"thread_id": thread_id}})
+    messages = state.values.get("messages", []) if state.values else []
+
+    return {
+        "messages": [
+            {"role": "user" if m.type == "human" else "bot", "content": m.content}
+            for m in messages
+        ]
+    }
+
+
 @app.get("/health", response_model=HealthResponse)
 async def health():
     """Health check for Docker/Kubernetes."""
