@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     # Comma-separated list of origins allowed to call this API.
     # Local dev defaults cover Live Server / VS Code. In production, set
     # ALLOWED_ORIGINS on Render to your real deployed frontend domain(s).
-    allowed_origins: str = "http://127.0.0.1:5500,http://localhost:5500,http://localhost:5173,http://localhost:4173"
+    allowed_origins: str = "http://127.0.0.1:5500,http://localhost:5500,http://localhost:5173,http://localhost:4173,,http://localhost:4175"
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

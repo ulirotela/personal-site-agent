@@ -1,7 +1,8 @@
-// Nav background/blur toggle + back-to-top button visibility, both driven
-// by scroll position. Only used on index.html — blog pages don't include
-// this file (their nav is styled permanently "on" via body.blog-page in
-// styles.css, and they have no #back-to-top button).
+// Nav background/blur toggle, driven by scroll position. Only used on
+// index.html — blog pages don't include this file (their nav is styled
+// permanently "on" via body.blog-page in styles.css). Scroll-to-top is
+// handled by the mascot button (onclick, in index.html), so there's no
+// separate #back-to-top element anymore.
 
 const API_BASE =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
@@ -9,18 +10,12 @@ const API_BASE =
     : "https://personal-site-agent.onrender.com";
 
 const nav = document.getElementById("nav");
-const backToTop = document.getElementById("back-to-top");
 
 const threadId= crypto.randomUUID();
 
 window.addEventListener("scroll", () => {
   const scrolled = window.scrollY > 20;
   nav.classList.toggle("scrolled", scrolled);
-  backToTop.classList.toggle("visible", window.scrollY > 400);
-});
-
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // --- Chat widget JS goes here---

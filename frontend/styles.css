@@ -443,38 +443,6 @@ footer {
   font-size: 0.85rem;
 }
 
-/* === Back to top === */
-
-#back-to-top {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(0.5rem);
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-  z-index: 100;
-}
-
-#back-to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
 /* === Blog listing === */
 
 .blog-header h1 {
