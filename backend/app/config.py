@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     fallback_model: str = "claude-haiku-4-5-20251001"
     pinecone_api_key: str
     pinecone_index_name: str = "personal-site-content"
+    database_url: str
 
 
     # LangSmith and LangChain settings

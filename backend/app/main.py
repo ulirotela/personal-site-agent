@@ -181,7 +181,7 @@ async def chat(request: Request, body: chatRequest):
         
         # ---- Step 3: Invoke LangGraph Agent ----
         try:
-            result = agent.invoke(cleaned_message)
+            result = agent.invoke(cleaned_message, thread_id=body.thread_id)
         except Exception as e:
             logger.error(f"Agent invocation failed: {e}", extra={"extra_data": {
                 "thread_id": body.thread_id,

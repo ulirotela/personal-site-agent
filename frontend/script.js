@@ -11,7 +11,8 @@ const API_BASE =
 
 const nav = document.getElementById("nav");
 
-const threadId= crypto.randomUUID();
+const threadId = localStorage.getItem("threadId") || crypto.randomUUID();
+localStorage.setItem("threadId", threadId);
 
 window.addEventListener("scroll", () => {
   const scrolled = window.scrollY > 20;

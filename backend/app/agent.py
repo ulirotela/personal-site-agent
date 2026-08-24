@@ -15,6 +15,8 @@ from pydantic import BaseModel
 from typing import Literal
 from langchain_core.messages import SystemMessage
 from pinecone import Pinecone as PineconeClient
+from psycopg_pool import ConnectionPool
+from langgraph.checkpoint.postgres import PostgresSaver
 
 from app.config import get_settings
 
@@ -64,6 +66,22 @@ class ProductionAgent:
         self.pc = PineconeClient(api_key=settings.pinecone_api_key)
         self.pinecone_index = self.pc.Index(settings.pinecone_index_name)
         self.embedder = OpenAIEmbeddings(model="text-embedding-3-small", api_key=settings.openai_api_key)
+        self.pool = ConnectionPool(
+            conninfo=settings.database_url,
+            max_size=20,
+            kwargs={"autocommit": True, "prepare_threshold": 0},
+        )
+        self.checkpointer = PostgresSaver(self.pool)
+        self.checkpointer.setup()
+
+        with self.pool.connection() as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS conversation_activity (
+                    thread_id TEXT PRIMARY KEY,
+                    last_seen TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+            """)
+
         self.graph = self._build_graph()
 
     def _invoke_with_fallback(self, messages: list)-> dict:
@@ -203,22 +221,36 @@ class ProductionAgent:
         graph.add_edge("contact", END)
         graph.add_edge("personal", END)
 
-        return graph.compile()
+        return graph.compile(checkpointer=self.checkpointer)
 
     @traceable(name="production_agent_invoke")
-    def invoke(self, message: str) -> dict:
+    def invoke(self, message: str, thread_id: str) -> dict:
         """
         Invoke the agent with a user message.
         Returns: {"response": str, "model_used": str, "error": str | None}
         """
-        result = self.graph.invoke({
-            "messages": [HumanMessage(content=message)],
-            "error": None,
-            "model_used": "",
-        })
+
+        result = self.graph.invoke(
+            {
+                "messages": [HumanMessage(content=message)],
+                "error": None,
+                "model_used": "",
+            },
+            config={"configurable": {"thread_id": thread_id}},
+        )
+
+        with self.pool.connection() as conn:
+            conn.execute(
+                """
+                INSERT INTO conversation_activity (thread_id, last_seen)
+                VALUES (%s, now())
+                ON CONFLICT (thread_id) DO UPDATE SET last_seen = now()
+                """,
+                (thread_id,),
+            )
 
         return {
-            "response": result["messages"][-1].content,
-            "model_used": result.get("model_used", "unknown"),
-            "error": result.get("error"),
+        "response": result["messages"][-1].content,
+        "model_used": result.get("model_used", "unknown"),
+        "error": result.get("error"),
         }
