@@ -1,0 +1,35 @@
+name: Backend tests
+
+on:
+    push:
+        paths:
+            - "backend/**"
+            - ".github/workflows/backend-tests.yml"
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: backend
+
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+
+          - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+              python-version: "3.13"
+          
+          - name: install uv
+            uses: astral-sh/setup-uv@v3
+
+          - name: install dependencies
+            run: uv sync --frozen
+
+          - name: Run test
+            run: uv run pytest
+
+
