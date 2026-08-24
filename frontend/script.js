@@ -18,6 +18,31 @@ window.addEventListener("scroll", () => {
   nav.classList.toggle("scrolled", scrolled);
 });
 
+// --- In-page nav links (#expertise, #work, etc.) scroll to the section
+// manually instead of letting the browser jump via the URL hash — that's
+// what keeps #expertise/#work/#experience/#contact out of the address bar.
+document.querySelectorAll('.nav-links a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const target = document.getElementById(link.getAttribute("href").slice(1));
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+    history.replaceState(null, "", window.location.pathname);
+  });
+});
+
+// Same idea, but for when the page *loads* with a #hash already in the URL
+// — e.g. clicking "Contact" from a blog page navigates to "../#contact",
+// a real page load, not a click we can intercept. Scroll there, then strip
+// the hash so it doesn't linger in the address bar.
+if (window.location.hash) {
+  const target = document.getElementById(window.location.hash.slice(1));
+  if (target) {
+    target.scrollIntoView();
+    history.replaceState(null, "", window.location.pathname);
+  }
+}
+
 // --- Chat widget JS goes here---
 
 const chatToggle = document.getElementById("chat-toggle");

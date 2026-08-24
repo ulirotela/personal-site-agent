@@ -38,7 +38,7 @@ BLOG_DIR = ROOT / "public" / "blog"
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n(.*)$", re.DOTALL)
 
 MASCOT_HTML = """
-  <button class="mascot" type="button" aria-label="Back to home" onclick="window.location.href='../index.html'">
+  <button class="mascot" type="button" aria-label="Back to home" onclick="window.location.href='../'">
     <svg viewBox="0 0 76 88" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
       <g fill="var(--text)">
         <rect x="28" y="0" width="20" height="4"/>
@@ -207,7 +207,7 @@ def render_listing(posts: list[dict]) -> str:
     return PAGE_TEMPLATE.format(
         title="Blog — Uli Rotela",
         mascot=MASCOT_HTML,
-        nav=NAV_HTML.format(home="../index.html", blog_home="index.html"),
+        nav=NAV_HTML.format(home="../", blog_home="."),
         body=body,
         footer=FOOTER_HTML,
     )
@@ -215,7 +215,7 @@ def render_listing(posts: list[dict]) -> str:
 
 def render_post(post: dict) -> str:
     body = f"""  <section>
-    <a class="back-link" href="index.html">&larr; back to blog</a>
+    <a class="back-link" href=".">&larr; back to blog</a>
     <div class="post-header">
       <div class="post-meta">{post['date']}</div>
       <h1>{post['title']}</h1>
@@ -228,7 +228,7 @@ def render_post(post: dict) -> str:
     return PAGE_TEMPLATE.format(
         title=f"{post['title']} — Uli Rotela",
         mascot=MASCOT_HTML,
-        nav=NAV_HTML.format(home="../index.html", blog_home="index.html"),
+        nav=NAV_HTML.format(home="../", blog_home="."),
         body=body,
         footer=FOOTER_HTML,
     )
