@@ -25,6 +25,7 @@ pool = ConnectionPool(
     conninfo=settings.database_url,
     max_size=5,
     kwargs={"autocommit": True, "prepare_threshold": 0},
+    check=ConnectionPool.check_connection,
 )
 
 with pool.connection() as conn:
