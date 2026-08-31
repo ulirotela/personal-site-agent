@@ -70,6 +70,7 @@ class ProductionAgent:
             conninfo=settings.database_url,
             max_size=20,
             kwargs={"autocommit": True, "prepare_threshold": 0},
+            check=ConnectionPool.check_connection,
         )
         self.checkpointer = PostgresSaver(self.pool)
         self.checkpointer.setup()
@@ -100,7 +101,7 @@ class ProductionAgent:
                     "model_used": "error",
             }
 
-    def _retrieve_context(self, query: str, category: str, top_k: int = 3) -> str:
+    def _retrieve_context(self, query: str, category: str, top_k: int = 6) -> str:
         """Retrieve the most relevant knowledge chunks for this query, filtered by category."""
         query_vector = self.embedder.embed_query(query)
         results = self.pinecone_index.query(
