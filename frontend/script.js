@@ -7,7 +7,7 @@
 const API_BASE =
   window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
     ? "http://localhost:8000"
-    : "https://personal-site-agent.onrender.com";
+    : "https://personal-site-agent-1q9a.onrender.com";
 
 const nav = document.getElementById("nav");
 
